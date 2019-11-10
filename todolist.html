@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="todostyle.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <title>Day Scheduler</title>
+</head>
+<body>
+    <div id="header">
+     <h1>Work Day Scheduler</h1>
+     <h2></h2>
+     <h3>A simple calendar app for scheduling your work day</h3>
+     <div id="displayMoment"></div>
+
+    </div>
+    <hr>
+    <div id="myplanner">
+        <section id="9" >
+            <time>09:00am</time> 
+            <textarea type="text" class="description" id="9" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+
+        <section id="10" >
+            <time>10:00am</time> 
+            <textarea type="text" class="description" id="10" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+
+        <section id="11" >
+            <time>11:00am</time> 
+            <textarea type="text" class="description" id="11" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+       
+        <section id="12" >
+            <time>12:00pm</time> 
+            <textarea type="text" class="description" id="12" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+       
+        <section id="1" >
+            <time>01:00pm</time> 
+            <textarea type="text" class="description" id="1" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+      
+        <section id="2" >
+            <time>02:00pm</time> 
+            <textarea type="text" class="description" id="2" placeholder=""></textarea>
+            <button class="btn click-me" ><i class="fa fa-lock"></i></button>
+        </section>
+      
+        <section id="3">
+            <time>03:00pm</time>   
+            <textarea type="text" class="description" id="3" placeholder=""></textarea>
+            <button class="btn"><i class="fa fa-lock"></i></button>
+        </section>
+
+       
+        <section id="4">
+            <time>04:00pm</time>   
+            <textarea type="text" class="description" id="4" placeholder=""></textarea>
+            <button class="btn"><i class="fa fa-lock"></i></button>
+        </section>
+       
+
+        <section id="5">
+            <time>05:00pm</time>   
+            <textarea type="text" class="description" id="5" placeholder=""></textarea>
+            <button class="btn"><i class="fa fa-lock"></i></button>
+        </section>
+
+
+    </div>
+  
+<script src="lib/moment/moment.min.js"></script>
+<script>
+ 
+    
+    
+
+(function() {
+  
+  var NowMoment = moment().format('dddd, MMMM Do');
+  
+
+  
+  var eDisplayMoment = document.getElementById('displayMoment');
+  eDisplayMoment.innerHTML = NowMoment;
+  //set up an interval to update now time
+  //grab now moment, grab jquery to have class,grab id attribute,grab now moment,and use if statement to compare the classes
+})();
+
+
+
+    $(".click-me").on("click", function() {
+        var value = $(this).siblings(".description").val();
+    var time = $(this).parent().attr("id");
+    localStorage.setItem(time, value);
+console.log("TIME", time);
+      });
+
+//displaying text after page is refreshed
+    $(document).ready(function(){
+
+    
+    $("#9 .description").val(localStorage.getItem("9"));
+    $("#10 .description").val(localStorage.getItem("10"));
+    $("#11 .description").val(localStorage.getItem("11"));
+    $("#12 .description").val(localStorage.getItem("12"));
+    $("#1 .description").val(localStorage.getItem("1"));
+    $("#2 .description").val(localStorage.getItem("2"));
+    $("#3 .description").val(localStorage.getItem("3"));
+    $("#4 .description").val(localStorage.getItem("4"));
+    $("#5 .description").val(localStorage.getItem("5"));
+});
+
+function hourColors() {
+                $(".description").each(function() {
+                    var blockHour = parseInt($(this).attr("id"))
+                    var currentHour = moment().format("HH");
+                    if (blockHour < currentHour) {
+                        $(this).addClass("past bg-light")
+                    } else if (blockHour === currentHour) {
+                        $(this).removeClass("past bg-light")
+                        $(this).addClass("present bg-success")
+                    } else {
+                        $(this).removeClass("past bg-light")
+                        $(this).removeClass("present bg-success")
+                        $(this).addClass("future bg-info")
+                    }
+                });
+            }
+
+</script>
+
+</body>
+</html>
